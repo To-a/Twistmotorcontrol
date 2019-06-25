@@ -28,8 +28,8 @@ class Twist2int64():
 
     def twist2rpm(self, received_data):#convert to speed
         #(m/s, rad/s)
-        wheeles_size = 0.075#wheel size
-        axle_length = 0.35#axle_size(2d)
+        wheeles_size = 0.06#wheel size
+        axle_length = 0.2#axle_size(2d)
 
         v = received_data.linear.x#(m/s)
         omega = received_data.angular.z#(rad/s)
@@ -39,8 +39,8 @@ class Twist2int64():
 
         v_r = v_r/(wheeles_size * 2 * 3.14) #wheel_speed(1/s)
         v_l = v_l/(wheeles_size * 2 * 3.14) #wheel_speed(1/s)
-        r_rpm = 60 * v_r * 19 #gear rate
-        l_rpm = 60 * v_l * 19 #gear rate
+        r_rpm = 60 * v_r * 100 #gear rate
+        l_rpm = 60 * v_l * 100 #gear rate
 
         return r_rpm, l_rpm
 

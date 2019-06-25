@@ -13,10 +13,10 @@ class motor_command():
         self.Stop = False #Forward
         self.Enable = True
         self.pin_num_PWM = 18#pinの名前
-        self.pin_num_RotationDirect = 22
+        self.pin_num_RotationDirect = 23
         self.pin_num_Enable = 14
         #self.pin_num_Stop = 23
-        self.freq = 50 # Hz (PWM のパルスを一秒間に 50 個生成)
+        self.freq = 20000 # Hz (PWM のパルスを一秒間に 20kHz)
         #ノード立ち上げ（ROS）
         rospy.init_node('right_test')
         rospy.Subscriber('right_motor/cmd_vel', Int64, self.callback)
@@ -80,7 +80,7 @@ class motor_command():
         max_rpm = 6000 #規定値90%
         max_duty = 90
         min_rpm = 0 #規定値10%
-        min_duty = 10
+        min_duty = 0
         rpm_rate = (max_rpm-min_rpm)/(max_duty-min_duty)#1%に対するrpm
         if rpm >= 0:
             duty = rpm / rpm_rate + min_duty
