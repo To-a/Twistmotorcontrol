@@ -16,11 +16,12 @@ class Twist2int64():
         # rospy.Subscriber('motor/twist/cmd_vel', Twist, self.callback)
         rospy.Subscriber('cmd_vel', Twist, self.callback)
         self.pub_right = rospy.Publisher(
-            'right_motor/cmd_vel', Int64, queue_size=10)
+            'right_motor/cmd_vel', Int64, queue_size=10)  # name, topic_type, size
         self.pub_left = rospy.Publisher(
-            'left_motor/cmd_vel', Int64, queue_size=10)
+            'left_motor/cmd_vel', Int64, queue_size=10)  # name, topic_type, size
 
     def main_twist2int64(self):
+
         rospy.spin()
 
     def callback(self, message):
@@ -31,7 +32,7 @@ class Twist2int64():
         self.pub_left.publish(self.command_left)
 
     def twist2rpm(self, received_data):  # convert to speed
-        # (m/s, rad/s)
+        #(m/s, rad/s)
         wheeles_size = 0.06  # wheel size
         axle_length = 0.2  # axle_size(2d)
 
@@ -48,11 +49,10 @@ class Twist2int64():
 
         return r_rpm, l_rpm
 
-
 # Main Program
 Convert = Twist2int64()
 Convert.main_twist2int64()
 
 # pub memo
-# rostopic pub motor/twist/cmd_vel geometry_msgs/Twist '[1.0, 0.0, 0.0]'
-# '[0.0, 0.0, 0.0]'
+    # rostopic pub motor/twist/cmd_vel geometry_msgs/Twist '[1.0, 0.0, 0.0]'
+    # '[0.0, 0.0, 0.0]'
